@@ -1,0 +1,7 @@
+Para instalar o Script, acesse o http://localhost/phpmyadmin, entre com usuário e senha,
+crie um banco de dados com o nome desejado e importe o arquivo clientes.sql que está no
+pasta do script. No browser, abra o arquivo index.html e informe os dados para a conexão,
+o nome do banco de dados. É necessário permissão de escrita na pasta do script.
+O Script será instalado e estará pronto para uso.
+
+Desenvolvido por Montepage - contato@montepage.com.br

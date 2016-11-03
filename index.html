@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="crud, cadastro de clientes, php, mysql, crud php mysql">
+	<meta name="description" content="administre os seus clientes, banco de dados completo em www.montepage.com.br">
+	<title>Crud - PHP - Mysql - Cadastro de Clientes - Coisas Legais para Site - Montepage</title>
+	<link rel="stylesheet" type="text/css" href="css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
+	<style type="text/css">
+		#fm{
+			margin:0;
+			padding:10px 30px;
+		}
+		.ftitle{
+			font-size:14px;
+			font-weight:bold;
+			color:#666;
+			padding:5px 0;
+			margin-bottom:10px;
+			border-bottom:1px solid #ccc;
+		}
+		.fitem{
+			margin-bottom:5px;
+		}
+		.fitem label{
+			display:inline-block;
+			width:180px;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.install.js"></script>
+	<script type="text/javascript">
+	function configuraBanco() {
+			$('#fm').form('submit',{
+				url: 'install.php',
+					onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					var result = eval('('+result+')');
+					if (result.success){
+						$('#dlg').dialog('close');		// close the dialog
+						$.messager.show({
+							title: 'Configuração Salva com sucesso!',
+							msg: result.msg
+						});
+					} else {
+						$.messager.show({
+							title: 'Erro',
+							msg: result.msg
+						});
+					}
+				}
+			});
+}
+	</script>
+</head>
+<body>
+	<h2>Instalação Crud - PHP - Mysql - Cadastro de Clientes - Coisas Legais para Site - Montepage</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip">&nbsp;</div>
+		<div>Crie o banco de dados pelo PHPMYADMIN e importe o arquivo sql. Configure a Conexão com o Banco de dados na janela Modal Aberta.</div>
+	</div>
+	
+	<table id="dg" title="Cadastro de Clientes" class="easyui-datagrid" style="width:700px;height:250px"
+			url="pegar_cadastroclientes.php"
+			toolbar="#toolbar" pagination="true"
+			rownumbers="true" fitColumns="true" singleSelect="true">
+		<thead>
+			<tr>
+				<th field="nome" width="50">Nome</th>
+				<th field="sobrenome" width="50">Sobre Nome</th>
+				<th field="telefone" width="50">Telefone</th>
+				<th field="email" width="50">E-mail</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="toolbar">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="alert('Configure Primeiro a Conexão com o banco de dados MySql')" title="Adicionar Cliente">Novo Cliente</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="alert('Configure Primeiro a Conexão com o banco de dados MySql')" title="Alterar Dados do Cliente">Editar Cliente</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="alert('Configure Primeiro a Conexão com o banco de dados MySql')">Remover Cliente</a>
+	</div>
+	<div id="dlg" class="easyui-dialog" style="width:600px;height:380px;padding:10px 20px"
+			closed="true" buttons="#dlg-buttons">
+		<div class="ftitle">Configuração da Concexão MySql</div>
+		<form id="fm" method="post" novalidate>
+			<div class="fitem">
+				<label>Host:</label>
+				<input name="host" class="easyui-validatebox" required="true" value="localhost">
+			</div>
+			<div class="fitem">
+				<label>Usuário:</label>
+				<input name="user" class="easyui-validatebox" required="true" value="root">
+			</div>
+			<div class="fitem">
+				<label>Senha:</label>
+				<input name="password" class="easyui-validatebox">
+			</div>
+			<div class="fitem">
+				<label>Nome do Banco de Dados:</label>
+				<input name="database" class="easyui-validatebox" value="cadastroclientes" required="true">
+			</div>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="configuraBanco()">Configurar</a>
+	</div>
+</body>
+</html>
